@@ -45,7 +45,7 @@ class MessageController {
         return messageService.create(text)
     }
 
-    @ApiOperation(value = "Find all messages")
+    @ApiOperation(value = "Find all saved messages")
     @GetMapping(value = ["/messages"])
     @ResponseBody
     @ResponseStatus(value = OK)
