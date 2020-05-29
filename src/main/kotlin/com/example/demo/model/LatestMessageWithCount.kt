@@ -21,6 +21,6 @@ data class LatestMessageWithCount(
         val created: String,
 
         @NotNull
-        @Column(name = "count")
-        val count: Long
+        @Column(name = "total_saved_messages")
+        val totalSavedMessages: Long
 )

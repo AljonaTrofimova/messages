@@ -35,7 +35,6 @@ class ApplicationSwaggerConfig {
     private fun paths(): Predicate<String> {
         return Predicates.or(PathSelectors.regex("/messages*"),
                 Predicates.or(PathSelectors.regex("/messages/message*"),
-                Predicates.or(PathSelectors.regex("/messages/latest-message*"),
-                        PathSelectors.regex("/*"))))
+                Predicates.or(PathSelectors.regex("/messages/latest-message*"))))
     }
 }
