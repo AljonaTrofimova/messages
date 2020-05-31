@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatus.OK
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin
 @Api("Message controller")
 @RestController("MESSAGE_CONTROLLER")
 class MessageController {
