@@ -1,6 +1,7 @@
 package com.example.demo.model
 
 import com.sun.istack.NotNull
+import java.time.LocalDateTime
 import javax.persistence.*
 import javax.persistence.GenerationType.IDENTITY
 
@@ -18,5 +19,5 @@ data class Message(
 
         @NotNull
         @Column(name = "created")
-        val created: String
+        val created: LocalDateTime
 )

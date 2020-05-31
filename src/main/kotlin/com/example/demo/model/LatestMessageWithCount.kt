@@ -1,6 +1,7 @@
 package com.example.demo.model
 
 import com.sun.istack.NotNull
+import java.time.LocalDateTime
 import javax.persistence.*
 import javax.persistence.GenerationType.IDENTITY
 
@@ -18,7 +19,7 @@ data class LatestMessageWithCount(
 
         @NotNull
         @Column(name = "created")
-        val created: String,
+        val created: LocalDateTime,
 
         @NotNull
         @Column(name = "total_saved_messages")

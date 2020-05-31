@@ -18,9 +18,8 @@ class MessageService {
         var message: Message? = null
         var validationText: String
         if (isBlank(text)) return MessageCreationResponse(UNPROCESSABLE_ENTITY, "Message text should not be empty")
-
         try {
-            message = messageRepository.save(Message(0, text, LocalDateTime.now().toString()))
+            message = messageRepository.save(Message(0, text, LocalDateTime.now()))
             validationText = "Message was created"
 
         } catch (ex: Exception) {
