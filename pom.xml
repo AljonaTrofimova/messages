@@ -116,7 +116,7 @@
                     <compilerPlugins>
                         <plugin>jpa</plugin>
                         <plugin>spring</plugin>
-
+                        <plugin>no-arg</plugin>
                     </compilerPlugins>
                 </configuration>
                 <dependencies>

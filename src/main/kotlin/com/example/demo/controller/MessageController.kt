@@ -26,16 +26,12 @@ class MessageController {
     @Qualifier("MESSAGE_REPOSITORY")
     lateinit var messageRepository: MessageRepository
 
-    @Autowired
-    @Qualifier("LATEST_MESSAGE_REPOSITORY")
-    lateinit var latestMessageRepository: LatestMessageRepository
-
     @ApiOperation(value = "Find the latest message along with it's creation time and the total number of messages saved")
-    @GetMapping(value = ["/messages/latest-message"])
+    @GetMapping(value = ["messages/latest-message"])
     @ResponseBody
     @ResponseStatus(value = OK)
     private fun findLatestAndCount(): LatestMessageWithCount? {
-        return latestMessageRepository.findLatestMessageWithCount();
+        return messageRepository.findLatestMessageWithCount();
     }
 
     @ApiOperation(value = "Create message")
@@ -51,6 +47,6 @@ class MessageController {
     @ResponseBody
     @ResponseStatus(value = OK)
     private fun findAllMessages(): Collection<Message>? {
-        return messageRepository.findAll()
+        return messageRepository.findAllMessages()
     }
 }

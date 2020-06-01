@@ -1,27 +1,11 @@
 package com.example.demo.model
 
-import com.sun.istack.NotNull
 import java.time.LocalDateTime
-import javax.persistence.*
-import javax.persistence.GenerationType.IDENTITY
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "message")
-data class LatestMessageWithCount(
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(name = "id")
-        val id: Long,
-
-        @NotNull
-        @Column(name = "text")
-        val text: String,
-
-        @NotNull
-        @Column(name = "created")
-        val created: LocalDateTime,
-
-        @NotNull
-        @Column(name = "total_saved_messages")
-        val totalSavedMessages: Long
-)
+class LatestMessageWithCount(id: Long, text: String, created: LocalDateTime, @Column(name = "total_saved_messages") val count: Long) : AbstractMessage(id, text, created) {
+}

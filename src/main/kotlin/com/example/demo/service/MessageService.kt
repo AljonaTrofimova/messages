@@ -1,6 +1,7 @@
 package com.example.demo.service
 
 import com.example.demo.api.MessageCreationResponse
+import com.example.demo.model.LatestMessageWithCount
 import com.example.demo.model.Message
 import com.example.demo.repository.MessageRepository
 import org.apache.commons.lang3.StringUtils.isBlank

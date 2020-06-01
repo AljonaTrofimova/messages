@@ -1,23 +1,9 @@
 package com.example.demo.model
 
-import com.sun.istack.NotNull
 import java.time.LocalDateTime
-import javax.persistence.*
-import javax.persistence.GenerationType.IDENTITY
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "message")
-data class Message(
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(name = "id")
-        val id: Long,
-
-        @NotNull
-        @Column(name = "text")
-        val text: String,
-
-        @NotNull
-        @Column(name = "created")
-        val created: LocalDateTime
-)
+open class Message(id: Long, text: String, created: LocalDateTime) : AbstractMessage(id, text, created)
