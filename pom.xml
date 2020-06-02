@@ -21,6 +21,7 @@
         <lib.swagger.bootstrap.version>3.3.5</lib.swagger.bootstrap.version>
         <lib.swagger.version>2.9.2</lib.swagger.version>
         <lib.swagger.annotations.version>1.5.20</lib.swagger.annotations.version>
+        <kotlin.code.style>official</kotlin.code.style>
     </properties>
 
     <dependencies>

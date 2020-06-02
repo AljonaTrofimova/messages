@@ -32,7 +32,7 @@ class MessageController {
     @ResponseBody
     @ResponseStatus(value = OK)
     private fun findLatestAndCountV2(): LatestMessageWithCountV2? {
-        var message: LatestMessageWithCountV2 = messageRepository.findTopByOrderByIdDesc()
+        val message: LatestMessageWithCountV2 = messageRepository.findTopByOrderByIdDesc()
         message.count = messageRepository.findAllMessages().count().toLong()
         return message
     }
@@ -48,11 +48,13 @@ class MessageController {
     @ApiOperation(value = "Create message")
     @PostMapping(value = ["/messages/message"])
     @ResponseBody
-    private fun createMessage(@ApiParam(name = "text", example = "Example message content", required = true)
-                              @RequestParam(value = "text", required = true) text: String): HttpStatus? {
-        if (isBlank(text)) return UNPROCESSABLE_ENTITY;
-        else if (!messageService.create(text)) return INTERNAL_SERVER_ERROR;
-        return OK;
+    private fun createMessage(
+        @ApiParam(name = "text", example = "Example message content", required = true)
+        @RequestParam(value = "text", required = true) text: String
+    ): HttpStatus? {
+        if (isBlank(text)) return UNPROCESSABLE_ENTITY
+        else if (!messageService.create(text)) return INTERNAL_SERVER_ERROR
+        return OK
     }
 
     @ApiOperation(value = "Find all saved messages")

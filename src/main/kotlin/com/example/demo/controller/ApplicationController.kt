@@ -17,6 +17,6 @@ class ApplicationController {
     @ResponseBody
     private fun hello(): String? {
         return "Message service" +
-                "<br><a href=\"http://localhost:" + environment.getProperty("local.server.port") + "/swagger-ui.html\">Swagger documentation</a>\n";
+                "<br><a href=\"http://localhost:" + environment.getProperty("local.server.port") + "/swagger-ui.html\">Swagger documentation</a>\n"
     }
 }

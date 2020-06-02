@@ -10,18 +10,17 @@ import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
 abstract class AbstractMessage(
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(name = "id")
-        open var id: Long,
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id")
+    open var id: Long,
 
-        @NotNull
-        @Column(name = "text")
-        open var text: String,
+    @NotNull
+    @Column(name = "text")
+    open var text: String,
 
-        @NotNull
-        @Column(name = "created")
-        open var created: LocalDateTime
+    @NotNull
+    @Column(name = "created")
+    open var created: LocalDateTime
 
-) {
-}
+)

@@ -11,7 +11,7 @@ class MessageService {
     @Autowired
     lateinit var messageRepository: MessageRepository
 
-    public fun create(text: String): Boolean {
+    fun create(text: String): Boolean {
         var message: Message? = null
         try {
             message = messageRepository.save(Message(0, text, LocalDateTime.now()))

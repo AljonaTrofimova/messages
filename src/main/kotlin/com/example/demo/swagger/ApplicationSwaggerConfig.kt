@@ -18,14 +18,14 @@ class ApplicationSwaggerConfig {
     @Bean
     fun endpoint(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
-                .enable(true)
-                .groupName("version 1.0")
-                .apiInfo(apiInfo())
-                .useDefaultResponseMessages(false)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(paths())
-                .build()
+            .enable(true)
+            .groupName("version 1.0")
+            .apiInfo(apiInfo())
+            .useDefaultResponseMessages(false)
+            .select()
+            .apis(RequestHandlerSelectors.any())
+            .paths(paths())
+            .build()
     }
 
     private fun apiInfo(): ApiInfo {
@@ -33,10 +33,17 @@ class ApplicationSwaggerConfig {
     }
 
     private fun paths(): Predicate<String> {
-        return Predicates.or(PathSelectors.regex("/messages*"),
-                Predicates.or(PathSelectors.regex("/messages/message*"),
-                        Predicates.or(PathSelectors.regex("/messages/v1/latest-message*"),
-                                Predicates.or(PathSelectors.regex("/messages/v2/latest-message*")
-                                ))))
+        return Predicates.or(
+            PathSelectors.regex("/messages*"),
+            Predicates.or(
+                PathSelectors.regex("/messages/message*"),
+                Predicates.or(
+                    PathSelectors.regex("/messages/v1/latest-message*"),
+                    Predicates.or(
+                        PathSelectors.regex("/messages/v2/latest-message*")
+                    )
+                )
+            )
+        )
     }
 }
