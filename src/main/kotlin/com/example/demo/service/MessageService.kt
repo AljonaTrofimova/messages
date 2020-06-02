@@ -1,6 +1,8 @@
 package com.example.demo.service
 
+import com.example.demo.model.LatestMessageWithCountV2
 import com.example.demo.model.Message
+import com.example.demo.repository.AbstractMessageRepository
 import com.example.demo.repository.MessageRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -9,7 +11,16 @@ import java.time.LocalDateTime
 @Service(value = "MESSAGE_SERVICE")
 class MessageService {
     @Autowired
+    lateinit var abstractMessageRepository: AbstractMessageRepository
+
+    @Autowired
     lateinit var messageRepository: MessageRepository
+
+    fun findLastMessageWithCount(): LatestMessageWithCountV2? {
+        val message: LatestMessageWithCountV2 = abstractMessageRepository.findTopByOrderByIdDesc() ?: return null
+        message.count = messageRepository.count()
+        return message
+    }
 
     fun create(text: String): Boolean {
         var message: Message? = null
