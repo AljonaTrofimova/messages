@@ -1,6 +1,5 @@
 package com.example.demo.controller
 
-import com.example.demo.api.MessageCreationResponse
 import com.example.demo.model.LatestMessageWithCountV1
 import com.example.demo.model.LatestMessageWithCountV2
 import com.example.demo.model.Message
@@ -9,9 +8,11 @@ import com.example.demo.service.MessageService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
+import org.apache.commons.lang3.StringUtils.isBlank
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.http.HttpStatus.OK
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.*
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin
@@ -48,8 +49,10 @@ class MessageController {
     @PostMapping(value = ["/messages/message"])
     @ResponseBody
     private fun createMessage(@ApiParam(name = "text", example = "Example message content", required = true)
-                              @RequestParam(value = "text", required = true) text: String): MessageCreationResponse? {
-        return messageService.create(text)
+                              @RequestParam(value = "text", required = true) text: String): HttpStatus? {
+        if (isBlank(text)) return UNPROCESSABLE_ENTITY;
+        else if (!messageService.create(text)) return INTERNAL_SERVER_ERROR;
+        return OK;
     }
 
     @ApiOperation(value = "Find all saved messages")
