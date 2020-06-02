@@ -18,7 +18,7 @@ class MessageService {
 
     fun findLastMessageWithCount(): LatestMessageWithCountV2? {
         val message: LatestMessageWithCountV2 = abstractMessageRepository.findTopByOrderByIdDesc() ?: return null
-        message.count = messageRepository.count()
+        message.totalSavedMessages = messageRepository.count()
         return message
     }
 
