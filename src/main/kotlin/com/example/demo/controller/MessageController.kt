@@ -1,9 +1,9 @@
 package com.example.demo.controller
 
 import com.example.demo.api.MessageCreationResponse
-import com.example.demo.model.LatestMessageWithCount
+import com.example.demo.model.LatestMessageWithCountV1
+import com.example.demo.model.LatestMessageWithCountV2
 import com.example.demo.model.Message
-import com.example.demo.repository.LatestMessageRepository
 import com.example.demo.repository.MessageRepository
 import com.example.demo.service.MessageService
 import io.swagger.annotations.Api
@@ -26,12 +26,22 @@ class MessageController {
     @Qualifier("MESSAGE_REPOSITORY")
     lateinit var messageRepository: MessageRepository
 
-    @ApiOperation(value = "Find the latest message along with it's creation time and the total number of messages saved")
-    @GetMapping(value = ["messages/latest-message"])
+    @ApiOperation(value = "V2 Find the latest message along with it's creation time and the total number of messages saved")
+    @GetMapping(value = ["messages/v2/latest-message"])
     @ResponseBody
     @ResponseStatus(value = OK)
-    private fun findLatestAndCount(): LatestMessageWithCount? {
-        return messageRepository.findLatestMessageWithCount();
+    private fun findLatestAndCountV2(): LatestMessageWithCountV2? {
+        var message: LatestMessageWithCountV2 = messageRepository.findTopByOrderByIdDesc()
+        message.count = messageRepository.findAllMessages().count().toLong()
+        return message
+    }
+
+    @ApiOperation(value = "V1 Find the latest message along with it's creation time and the total number of messages saved")
+    @GetMapping(value = ["messages/v1/latest-message"])
+    @ResponseBody
+    @ResponseStatus(value = OK)
+    private fun findLatestAndCountV1(): LatestMessageWithCountV1? {
+        return messageRepository.findLatestMessageWithCount()
     }
 
     @ApiOperation(value = "Create message")
