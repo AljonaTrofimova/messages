@@ -10,5 +10,5 @@ import javax.persistence.Table
 class LatestMessageWithCountV2(id: Long,
                                text: String,
                                created: LocalDateTime,
-                               @Transient @Column(name = "total_saved_messages") var totalSavedMessages: Long) :
+                               @Transient @Column(name = "total_saved_messages") val totalSavedMessages: Long) :
     AbstractMessage(id, text, created)

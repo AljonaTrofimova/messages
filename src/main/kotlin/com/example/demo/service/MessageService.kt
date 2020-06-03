@@ -2,7 +2,6 @@ package com.example.demo.service
 
 import com.example.demo.model.LatestMessageWithCountV2
 import com.example.demo.model.Message
-import com.example.demo.repository.AbstractMessageRepository
 import com.example.demo.repository.MessageRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -19,15 +18,15 @@ class MessageService {
     }
 
     fun create(text: String): Boolean {
-        var message: Message? = null
+        val message: Message?
         try {
             message = messageRepository.save(Message(0, text, LocalDateTime.now()))
-            println("Message was created")
+            return messageRepository.findById(message.id).isPresent
 
         } catch (ex: Exception) {
             println("Cannot create message due to $ex") // todo logs
         }
-        return message != null // or try to fetch created object by id and return it if success
+        return false
     }
 
 }

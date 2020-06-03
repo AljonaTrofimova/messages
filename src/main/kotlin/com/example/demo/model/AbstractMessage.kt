@@ -13,14 +13,14 @@ abstract class AbstractMessage(
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
-    open var id: Long,
+    open val id: Long,
 
     @NotNull
     @Column(name = "text")
-    open var text: String,
+    open val text: String,
 
     @NotNull
     @Column(name = "created")
-    open var created: LocalDateTime
+    open val created: LocalDateTime
 
 )

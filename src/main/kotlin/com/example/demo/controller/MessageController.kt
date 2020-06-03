@@ -57,7 +57,6 @@ class MessageController {
         if (isBlank(text)) return ResponseEntity.status(UNPROCESSABLE_ENTITY).build()
         else if (!messageService.create(text)) return ResponseEntity.status(INTERNAL_SERVER_ERROR).build()
         return ResponseEntity.status(OK).build()
-
     }
 
     @ApiOperation(value = "Find all saved messages")
