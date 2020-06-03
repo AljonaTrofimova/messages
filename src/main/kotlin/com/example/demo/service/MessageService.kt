@@ -11,15 +11,11 @@ import java.time.LocalDateTime
 @Service(value = "MESSAGE_SERVICE")
 class MessageService {
     @Autowired
-    lateinit var abstractMessageRepository: AbstractMessageRepository
-
-    @Autowired
     lateinit var messageRepository: MessageRepository
 
     fun findLastMessageWithCount(): LatestMessageWithCountV2? {
-        val message: LatestMessageWithCountV2 = abstractMessageRepository.findTopByOrderByIdDesc() ?: return null
-        message.totalSavedMessages = messageRepository.count()
-        return message
+        val message: Message = messageRepository.findTopByOrderByIdDesc() ?: return null
+        return LatestMessageWithCountV2(message.id, message.text, message.created, messageRepository.count())
     }
 
     fun create(text: String): Boolean {

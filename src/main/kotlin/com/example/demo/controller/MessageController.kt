@@ -12,8 +12,8 @@ import io.swagger.annotations.ApiParam
 import org.apache.commons.lang3.StringUtils.isBlank
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.*
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin
@@ -50,14 +50,14 @@ class MessageController {
 
     @ApiOperation(value = "Create message")
     @PostMapping(value = ["/messages/message"])
-    @ResponseBody
     private fun createMessage(
-        @ApiParam(name = "text", example = "Example message content", required = true)
-        @RequestParam(value = "text", required = true) text: String
-    ): HttpStatus? {
-        if (isBlank(text)) return UNPROCESSABLE_ENTITY
-        else if (!messageService.create(text)) return INTERNAL_SERVER_ERROR
-        return OK
+        @ApiParam(name = "text", example = "Example message content", required = false)
+        @RequestParam(value = "text", required = false) text: String
+    ): ResponseEntity<Unit> {
+        if (isBlank(text)) return ResponseEntity.status(UNPROCESSABLE_ENTITY).build()
+        else if (!messageService.create(text)) return ResponseEntity.status(INTERNAL_SERVER_ERROR).build()
+        return ResponseEntity.status(OK).build()
+
     }
 
     @ApiOperation(value = "Find all saved messages")
